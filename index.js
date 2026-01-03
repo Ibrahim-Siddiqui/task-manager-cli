@@ -20,6 +20,17 @@ if (command === 'add-task') {
   tasks.push(newTask);
   fs.writeFileSync('tasks.json', JSON.stringify(tasks, null, 2));
   console.log(`Task added: ${description}`);
+} 
+else if (command === 'show-task') {
+  const tasks = JSON.parse(fs.readFileSync('tasks.json', 'utf8'));
+  if (tasks.length === 0) {
+    console.log('No tasks found.');
+  } else {
+    console.log('Tasks:');
+    tasks.forEach(task => {
+      console.log(`ID: ${task.id}, Description: ${task.description}, Status: ${task.status}`);
+    });
+  }
 } else {
   // TODO: Add other commands here
 
